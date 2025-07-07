@@ -7,7 +7,7 @@ LOCAL_POSTERS_DIR=~/posters
 #
 # Using ssh keys for authentication
 # > ssh-keygen
-# > ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<pictures sersver>
+# > ssh-copy-id -i ~/.ssh/id_rsa.pub <user>@<pictures server>
 echo '------ rsync -------'
 rsync --archive --verbose --delete --exclude archived -e ssh og@frame.local:living-room-frame/pictures/ $LOCAL_POSTERS_DIR
 
