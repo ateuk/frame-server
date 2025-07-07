@@ -1,10 +1,17 @@
-#~/posters!/bin/bash
+#!/bin/bash
 
 # Set RTC clock
 /usr/sbin/hwclock -w
 
-# Wait for frame to be updated
-sleep 180
+# Wait for frame to be updated or any user to log in through SSH.
+sleep 120
+
+# Exit if an SSH user is connected.
+# `who` lists logged-in users, and SSH sessions typically use a `pts`.
+if who | grep -q pts; then
+    echo "Active SSH session detected. Aborting halt/reboot."
+    exit 0
+fi
 
 # Get the current hour in 24-hour format (00-23)
 # %H gives the hour with a leading zero if needed (e.g., 06 for 6 AM)
